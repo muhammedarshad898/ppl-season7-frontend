@@ -6,7 +6,8 @@
   align-items: center;
   justify-content: center;
   padding: 2rem 0;
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 .home-bg-video {
@@ -50,6 +51,8 @@ body.dark .home-bg-pattern {
   color: #fff;
   line-height: 0.9;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  overflow: visible;
+  word-break: keep-all;
 }
 
 body.dark .home-headline {
@@ -60,9 +63,12 @@ body.dark .home-headline {
   font-family: var(--ppl-font-mono, monospace);
   font-size: clamp(0.85rem, 1.8vw, 1.1rem);
   font-weight: 600;
-  letter-spacing: 0.4em;
+  letter-spacing: 0.2em;
   color: rgba(255, 255, 255, 0.9);
   margin-top: 0.75rem;
+  max-width: 100%;
+  overflow-wrap: break-word;
+  white-space: normal;
 }
 
 body.dark .home-subline {
