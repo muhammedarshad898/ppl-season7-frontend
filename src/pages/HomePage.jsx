@@ -56,7 +56,7 @@ function IconManager() {
 export default function HomePage() {
   const { state } = useSocket();
   const config = state?.config || {};
-  const leagueName = config.leagueName || 'PPL';
+  const leagueName = config.leagueName || 'Premier Player League';
   const leagueSeason = config.leagueSeason || 'Season 7';
   const leagueLogo = config.leagueLogo;
   const sublineText = `${leagueName} · ${leagueSeason} · Auction System`;

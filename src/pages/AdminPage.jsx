@@ -147,7 +147,7 @@ export default function AdminPage() {
                 <span className="admin-login-icon" aria-hidden>◆</span>
               </div>
               <h1 className="admin-login-title">Auction Control</h1>
-              <p className="admin-login-sub">PPL Season 7 · Admin</p>
+              <p className="admin-login-sub">Premier Player League · Season 7 · Admin</p>
             </div>
             <form className="admin-login-form" onSubmit={handleLogin}>
               <label className="admin-login-label" htmlFor="admin-password">
@@ -184,7 +184,8 @@ export default function AdminPage() {
             )}
             <div>
               <h1 className="admin-header-title">
-                PPL <span className="admin-header-season">{config.leagueSeason || 'S7'}</span>
+                {config.leagueName || 'Premier Player League'}{' '}
+                <span className="admin-header-season">{config.leagueSeason || 'S7'}</span>
               </h1>
               <p className="admin-header-sub">Auction control</p>
             </div>

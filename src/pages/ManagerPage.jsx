@@ -57,7 +57,7 @@ export default function ManagerPage() {
           <div className="mgr-select-icon-wrap">
             <span className="mgr-select-icon">👤</span>
           </div>
-          <h2 className="mgr-select-title">{config.leagueName || 'PPL'}</h2>
+          <h2 className="mgr-select-title">{config.leagueName || 'Premier Player League'}</h2>
           <p className="mgr-select-sub">
             {config.leagueSeason || 'Season 7'} · Manager View
           </p>
