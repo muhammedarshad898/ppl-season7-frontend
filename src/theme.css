@@ -1,0 +1,214 @@
+/* PPL theme – default light; body.dark for dark mode */
+:root {
+  --ppl-bg: #f4f7fb;
+  --ppl-bg2: #ffffff;
+  --ppl-bg3: #eef3fb;
+  --ppl-bg4: #e6edf8;
+  --ppl-card: #ffffff;
+  --ppl-border: #c9d7ef;
+  --ppl-green: #0a8f57;
+  --ppl-green-dim: rgba(10, 143, 87, 0.12);
+  --ppl-red: #d64141;
+  --ppl-yellow: #b18600;
+  --ppl-blue: #1868cc;
+  --ppl-text: #0e1c35;
+  --ppl-muted: #4a5f86;
+  --ppl-font: 'Barlow Condensed', sans-serif;
+  --ppl-font-mono: 'DM Mono', monospace;
+}
+
+body.dark {
+  --ppl-bg: #060610;
+  --ppl-bg2: #0b0b1a;
+  --ppl-bg3: #101020;
+  --ppl-bg4: #181830;
+  --ppl-card: #1a1a2e;
+  --ppl-border: #252545;
+  --ppl-green: #00e676;
+  --ppl-green-dim: rgba(0, 230, 118, 0.15);
+  --ppl-red: #ff4757;
+  --ppl-yellow: #ffc107;
+  --ppl-blue: #40c4ff;
+  --ppl-text: #eeeef8;
+  --ppl-muted: #7070a0;
+}
+
+/* Apply PPL theme only when NOT on admin or manager (they use Bootswatch Quartz) */
+body:not(.ppl-admin):not(.ppl-manager):not(.ppl-manager) {
+  background: var(--ppl-bg) !important;
+  color: var(--ppl-text) !important;
+  font-family: var(--ppl-font) !important;
+}
+
+body:not(.ppl-admin):not(.ppl-manager) .bg-dark { background-color: var(--ppl-bg2) !important; }
+body:not(.ppl-admin):not(.ppl-manager) .bg-secondary { background-color: var(--ppl-bg3) !important; }
+body:not(.ppl-admin):not(.ppl-manager) .bg-body { background-color: var(--ppl-bg) !important; }
+
+body:not(.ppl-admin):not(.ppl-manager) .card {
+  background-color: var(--ppl-card);
+  border: 1px solid var(--ppl-border);
+  border-radius: 8px;
+}
+
+body:not(.ppl-admin):not(.ppl-manager) .card-header {
+  background-color: var(--ppl-bg3);
+  border-bottom: 1px solid var(--ppl-border);
+  color: var(--ppl-muted);
+  font-family: var(--ppl-font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.75rem 1rem;
+}
+
+body:not(.ppl-admin):not(.ppl-manager) .card-body {
+  color: var(--ppl-text);
+  padding: 1rem;
+}
+
+body:not(.ppl-admin):not(.ppl-manager) .navbar {
+  background-color: var(--ppl-bg2) !important;
+  border-bottom: 1px solid var(--ppl-border);
+}
+
+body:not(.ppl-admin):not(.ppl-manager) .navbar-brand,
+body:not(.ppl-admin):not(.ppl-manager) .navbar-nav .nav-link {
+  color: var(--ppl-text) !important;
+}
+
+body:not(.ppl-admin):not(.ppl-manager) .navbar-nav .nav-link:hover {
+  color: var(--ppl-green) !important;
+}
+
+body:not(.ppl-admin):not(.ppl-manager) .btn-success,
+body:not(.ppl-admin):not(.ppl-manager) .btn-primary {
+  background-color: var(--ppl-green) !important;
+  border-color: var(--ppl-green) !important;
+  color: #000 !important;
+  font-weight: 700;
+}
+
+body:not(.ppl-admin):not(.ppl-manager) .btn-success:hover,
+body:not(.ppl-admin):not(.ppl-manager) .btn-primary:hover {
+  background-color: #33ffaa !important;
+  border-color: #33ffaa !important;
+  color: #000 !important;
+  box-shadow: 0 0 16px rgba(0, 230, 118, 0.35);
+}
+
+body:not(.ppl-admin):not(.ppl-manager) .btn-warning {
+  background-color: var(--ppl-yellow) !important;
+  border-color: var(--ppl-yellow) !important;
+  color: #000 !important;
+}
+
+body:not(.ppl-admin):not(.ppl-manager) .btn-outline-secondary {
+  border-color: var(--ppl-border);
+  color: var(--ppl-muted);
+}
+
+body:not(.ppl-admin):not(.ppl-manager) .btn-outline-secondary:hover {
+  border-color: var(--ppl-green);
+  color: var(--ppl-green);
+  background: rgba(0, 230, 118, 0.08);
+}
+
+body:not(.ppl-admin):not(.ppl-manager) .form-control,
+body:not(.ppl-admin):not(.ppl-manager) .form-select {
+  background-color: var(--ppl-bg2);
+  border: 1px solid var(--ppl-border);
+  color: var(--ppl-text);
+}
+
+body:not(.ppl-admin):not(.ppl-manager) .form-control:focus,
+body:not(.ppl-admin):not(.ppl-manager) .form-select:focus {
+  background-color: var(--ppl-bg2);
+  border-color: var(--ppl-green);
+  color: var(--ppl-text);
+  box-shadow: 0 0 0 0.2rem rgba(0, 230, 118, 0.15);
+}
+
+body:not(.ppl-admin):not(.ppl-manager) .form-control::placeholder {
+  color: var(--ppl-muted);
+}
+
+body:not(.ppl-admin):not(.ppl-manager) .table {
+  color: var(--ppl-text);
+}
+
+body:not(.ppl-admin):not(.ppl-manager) .table-dark {
+  --bs-table-bg: var(--ppl-bg3);
+  --bs-table-border-color: var(--ppl-border);
+  --bs-table-striped-bg: rgba(0, 230, 118, 0.03);
+  --bs-table-hover-bg: rgba(0, 230, 118, 0.06);
+}
+
+body:not(.ppl-admin):not(.ppl-manager) .table > :not(caption) > * > * {
+  border-bottom-color: var(--ppl-border);
+  padding: 0.5rem 0.75rem;
+}
+
+body:not(.ppl-admin):not(.ppl-manager) .badge.bg-success { background-color: var(--ppl-green) !important; color: #000; }
+body:not(.ppl-admin):not(.ppl-manager) .badge.bg-warning { background-color: var(--ppl-yellow) !important; color: #000; }
+body:not(.ppl-admin):not(.ppl-manager) .badge.bg-danger { background-color: var(--ppl-red) !important; }
+body:not(.ppl-admin):not(.ppl-manager) .badge.bg-secondary { background-color: var(--ppl-muted) !important; }
+
+body:not(.ppl-admin):not(.ppl-manager) .list-group-item {
+  background-color: var(--ppl-bg3);
+  border-color: var(--ppl-border);
+  color: var(--ppl-text);
+}
+
+body:not(.ppl-admin):not(.ppl-manager) .text-success { color: var(--ppl-green) !important; }
+body:not(.ppl-admin):not(.ppl-manager) .text-warning { color: var(--ppl-yellow) !important; }
+body:not(.ppl-admin):not(.ppl-manager) .text-danger { color: var(--ppl-red) !important; }
+body:not(.ppl-admin):not(.ppl-manager) .text-muted { color: var(--ppl-muted) !important; }
+
+body:not(.ppl-admin):not(.ppl-manager) .border-secondary { border-color: var(--ppl-border) !important; }
+
+body:not(.ppl-admin):not(.ppl-manager) .nav-tabs {
+  border-bottom-color: var(--ppl-border);
+}
+
+body:not(.ppl-admin):not(.ppl-manager) .nav-tabs .nav-link {
+  color: var(--ppl-muted);
+  border-color: transparent;
+  border-bottom: 2px solid transparent;
+}
+
+body:not(.ppl-admin):not(.ppl-manager) .nav-tabs .nav-link:hover {
+  color: var(--ppl-text);
+}
+
+body:not(.ppl-admin):not(.ppl-manager) .nav-tabs .nav-link.active {
+  color: var(--ppl-green);
+  background: transparent;
+  border-color: transparent transparent var(--ppl-green);
+}
+
+body:not(.ppl-admin):not(.ppl-manager) .accordion-button {
+  background-color: var(--ppl-bg3);
+  color: var(--ppl-text);
+  border-color: var(--ppl-border);
+}
+
+body:not(.ppl-admin):not(.ppl-manager) .accordion-button:not(.collapsed) {
+  background-color: var(--ppl-bg3);
+  color: var(--ppl-green);
+  box-shadow: none;
+}
+
+body:not(.ppl-admin):not(.ppl-manager) .accordion-button:focus {
+  box-shadow: 0 0 0 0.2rem rgba(0, 230, 118, 0.15);
+}
+
+body:not(.ppl-admin):not(.ppl-manager) .accordion-body {
+  background-color: var(--ppl-card);
+  border-color: var(--ppl-border);
+  color: var(--ppl-text);
+}
+
+body:not(.ppl-admin):not(.ppl-manager) .accordion-item {
+  background-color: transparent;
+  border-color: var(--ppl-border);
+}

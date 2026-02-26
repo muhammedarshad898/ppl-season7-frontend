@@ -1,0 +1,85 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Default: light theme */
+:root {
+  --bg: #f4f7fb;
+  --bg2: #ffffff;
+  --bg3: #eef3fb;
+  --bg4: #e6edf8;
+  --card: #ffffff;
+  --border: #c9d7ef;
+  --green: #0a8f57;
+  --gd: rgba(10, 143, 87, 0.08);
+  --gb: rgba(10, 143, 87, 0.26);
+  --glow: rgba(10, 143, 87, 0.25);
+  --red: #d64141;
+  --rd: rgba(214, 65, 65, 0.1);
+  --yellow: #b18600;
+  --blue: #1868cc;
+  --text: #0e1c35;
+  --td: #4a5f86;
+  --tm: #7f92b6;
+  --ff: 'Barlow Condensed', sans-serif;
+  --ffi: 'Inter', sans-serif;
+  --ffm: 'DM Mono', monospace;
+  --r: 6px;
+}
+
+body.dark {
+  --bg: #060610;
+  --bg2: #0b0b1a;
+  --bg3: #101020;
+  --bg4: #181830;
+  --card: #1a1a2e;
+  --border: #252545;
+  --green: #00e676;
+  --gd: rgba(0, 230, 118, 0.08);
+  --gb: rgba(0, 230, 118, 0.18);
+  --glow: rgba(0, 230, 118, 0.35);
+  --red: #ff4757;
+  --rd: rgba(255, 71, 87, 0.1);
+  --yellow: #ffc107;
+  --blue: #40c4ff;
+  --text: #eeeef8;
+  --td: #7070a0;
+  --tm: #333358;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--ff);
+  font-size: 15px;
+  min-height: 100vh;
+  overflow-x: hidden;
+  transition: background 0.25s, color 0.25s;
+}
+
+/* theme.css overrides body when Bootstrap is loaded; light theme still uses --bg/--text */
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+input, select, textarea {
+  font-family: var(--ffi);
+}
+
+@keyframes glow {
+  0%, 100% { box-shadow: none; }
+  50% { box-shadow: 0 0 10px var(--glow); }
+}

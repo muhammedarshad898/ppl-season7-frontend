@@ -1,0 +1,741 @@
+/* ========== Admin: Quartz theme colors – purple/teal dark gradients ========== */
+
+/* Quartz palette */
+:root.ppl-admin-root,
+body.ppl-admin {
+  --quartz-bg: #15132b;
+  --quartz-card: rgba(88, 80, 180, 0.18);
+  --quartz-card-border: rgba(139, 92, 246, 0.2);
+  --quartz-header: rgba(88, 80, 180, 0.35);
+  --quartz-table-head: linear-gradient(135deg, rgba(88, 80, 180, 0.5) 0%, rgba(20, 184, 166, 0.35) 100%);
+  --quartz-table-row: rgba(88, 80, 180, 0.08);
+  --quartz-table-row-alt: rgba(20, 184, 166, 0.06);
+  --quartz-accent: #14b8a6;
+  --quartz-purple: #8b5cf6;
+}
+
+/* ----- Login screen ----- */
+.admin-login-screen {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  background: linear-gradient(165deg, #131127 0%, #0f0d1a 40%, #0a0a12 100%);
+  position: relative;
+}
+
+.admin-login-screen::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 100% 60% at 50% -20%, rgba(139, 92, 246, 0.15) 0%, transparent 55%),
+    radial-gradient(ellipse 70% 50% at 80% 100%, rgba(20, 184, 166, 0.08) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.admin-login-card {
+  position: relative;
+  width: 100%;
+  max-width: 420px;
+  border-radius: 24px;
+  overflow: hidden;
+  background: linear-gradient(165deg, rgba(30, 27, 53, 0.95) 0%, rgba(21, 19, 43, 0.98) 100%);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(139, 92, 246, 0.22);
+  box-shadow:
+    0 25px 50px rgba(0, 0, 0, 0.4),
+    0 0 0 1px rgba(255, 255, 255, 0.04),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+.admin-login-card-accent {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #8b5cf6 0%, #14b8a6 50%, #8b5cf6 100%);
+  opacity: 0.9;
+}
+
+.admin-login-card-inner {
+  padding: 2.25rem 2rem 2rem;
+}
+
+.admin-login-brand {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.admin-login-icon-wrap {
+  width: 56px;
+  height: 56px;
+  margin: 0 auto 1.25rem;
+  border-radius: 16px;
+  background: linear-gradient(145deg, rgba(139, 92, 246, 0.35) 0%, rgba(20, 184, 166, 0.2) 100%);
+  border: 1px solid rgba(139, 92, 246, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 16px rgba(139, 92, 246, 0.2);
+}
+
+.admin-login-icon {
+  font-size: 1.35rem;
+  color: rgba(255, 255, 255, 0.95);
+  font-weight: 700;
+}
+
+.admin-login-title {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: 0.02em;
+  margin: 0 0 0.25rem;
+}
+
+.admin-login-sub {
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.45);
+  margin: 0;
+}
+
+.admin-login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.admin-login-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.7);
+  letter-spacing: 0.04em;
+}
+
+.admin-login-input {
+  width: 100%;
+  padding: 0.9rem 1rem;
+  font-size: 1rem;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.06);
+  color: #fff;
+  transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
+}
+
+.admin-login-input::placeholder {
+  color: rgba(255, 255, 255, 0.35);
+}
+
+.admin-login-input:hover {
+  border-color: rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.admin-login-input:focus {
+  outline: none;
+  border-color: rgba(20, 184, 166, 0.6);
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 0 0 3px rgba(20, 184, 166, 0.15);
+}
+
+.admin-login-btn {
+  margin-top: 0.5rem;
+  padding: 0.9rem 1.25rem;
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: #fff;
+  background: linear-gradient(135deg, #14b8a6 0%, #0d9488 100%);
+  border: none;
+  border-radius: 14px;
+  cursor: pointer;
+  transition: transform 0.15s, box-shadow 0.2s;
+  box-shadow: 0 4px 16px rgba(20, 184, 166, 0.35);
+}
+
+.admin-login-btn:hover {
+  background: linear-gradient(135deg, #2dd4bf 0%, #14b8a6 100%);
+  box-shadow: 0 6px 24px rgba(20, 184, 166, 0.4);
+  transform: translateY(-1px);
+}
+
+.admin-login-btn:active {
+  transform: translateY(0);
+}
+
+.admin-login-error {
+  margin: 0.25rem 0 0;
+  font-size: 0.85rem;
+  color: #f87171;
+  text-align: center;
+}
+
+/* Legacy class for any other usage */
+.admin-input {
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.06);
+  color: #fff;
+  backdrop-filter: blur(8px);
+}
+
+.admin-input:focus {
+  border-color: rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.1);
+}
+
+.admin-input::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+/* ----- Admin panel wrapper: Quartz dark gradient ----- */
+.admin-panel {
+  min-height: 100vh;
+  background: linear-gradient(165deg, #1a1730 0%, #15132b 25%, #121428 50%, #0f1729 75%, #0d1b2a 100%);
+  position: relative;
+}
+
+.admin-panel::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 80% 50% at 20% 0%, rgba(139, 92, 246, 0.12) 0%, transparent 50%),
+    radial-gradient(ellipse 60% 40% at 80% 100%, rgba(20, 184, 166, 0.1) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ----- Header: Quartz gradient bar ----- */
+.admin-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: linear-gradient(135deg, rgba(88, 80, 180, 0.4) 0%, rgba(30, 58, 138, 0.35) 50%, rgba(20, 184, 166, 0.15) 100%);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(139, 92, 246, 0.2);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.25);
+}
+
+.admin-header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding: 0.9rem 1.5rem;
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
+.admin-header-logo {
+  width: 42px;
+  height: 42px;
+  object-fit: contain;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.admin-header-title {
+  font-size: 1.4rem;
+  font-weight: 800;
+  margin: 0;
+  letter-spacing: 0.06em;
+  color: #fff;
+}
+
+.admin-header-season {
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.admin-header-sub {
+  font-size: 0.7rem;
+  color: rgba(255, 255, 255, 0.45);
+  margin: 0.2rem 0 0 0;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.admin-header-btn {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.45rem 0.9rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.95);
+  background: rgba(139, 92, 246, 0.2);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(139, 92, 246, 0.35);
+  border-radius: 10px;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+
+.admin-header-btn:hover {
+  background: rgba(20, 184, 166, 0.25);
+  border-color: rgba(20, 184, 166, 0.5);
+  color: #fff;
+}
+
+/* ----- Phase & timer pills ----- */
+.admin-phase-pill {
+  font-size: 0.65rem;
+  letter-spacing: 0.08em;
+  padding: 0.35rem 0.75rem;
+  border-radius: 10px;
+  font-weight: 700;
+  background: rgba(139, 92, 246, 0.2);
+  border: 1px solid rgba(139, 92, 246, 0.4);
+}
+
+.admin-phase-pill.pp-idle {
+  color: rgba(196, 181, 253, 0.9);
+}
+
+.admin-phase-pill.pp-live {
+  color: #2dd4bf;
+  border-color: rgba(20, 184, 166, 0.5);
+  background: rgba(20, 184, 166, 0.2);
+  animation: admin-glow 2s infinite;
+}
+
+.admin-phase-pill.pp-sold {
+  color: #fbbf24;
+  border-color: rgba(251, 191, 36, 0.5);
+  background: rgba(251, 191, 36, 0.15);
+}
+
+.admin-phase-pill.pp-unsold {
+  color: #f87171;
+  border-color: rgba(248, 113, 113, 0.5);
+  background: rgba(248, 113, 113, 0.15);
+}
+
+.admin-timer-pill {
+  font-size: 0.75rem;
+  padding: 0.35rem 0.8rem;
+  border-radius: 10px;
+  border: 1px solid rgba(20, 184, 166, 0.5);
+  color: #2dd4bf;
+  background: rgba(20, 184, 166, 0.2);
+  backdrop-filter: blur(6px);
+  font-weight: 700;
+}
+
+.admin-timer-pill.crit {
+  border-color: rgba(248, 113, 113, 0.6);
+  color: #f87171;
+  background: rgba(248, 113, 113, 0.2);
+  animation: admin-glow 0.9s infinite;
+}
+
+@keyframes admin-glow {
+  0%, 100% { box-shadow: none; }
+  50% { box-shadow: 0 0 12px rgba(20, 184, 166, 0.4); }
+}
+
+/* ----- Main content ----- */
+.admin-main {
+  padding: 1.5rem 1rem;
+  position: relative;
+  z-index: 1;
+}
+
+.admin-container {
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
+/* Spacing between cards and sections */
+.admin-row-gap {
+  gap: 1.5rem 0;
+}
+
+.admin-card-spaced {
+  margin-bottom: 1.5rem;
+}
+
+.admin-card-spaced:last-child {
+  margin-bottom: 0;
+}
+
+/* ----- Cards: Quartz purple/teal tint ----- */
+.admin-card {
+  background: linear-gradient(160deg, rgba(88, 80, 180, 0.22) 0%, rgba(30, 58, 138, 0.15) 50%, rgba(20, 184, 166, 0.08) 100%);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(139, 92, 246, 0.22);
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  overflow: hidden;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.admin-card:hover {
+  border-color: rgba(20, 184, 166, 0.35);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35), 0 0 24px rgba(20, 184, 166, 0.08);
+}
+
+.admin-card-stage {
+  border-left: 4px solid #14b8a6;
+}
+
+.admin-card-header {
+  background: linear-gradient(90deg, rgba(88, 80, 180, 0.35) 0%, rgba(20, 184, 166, 0.15) 100%);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(139, 92, 246, 0.25);
+  padding: 0.85rem 1.25rem;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.admin-card-body {
+  padding: 1.25rem;
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.admin-card-side .admin-card-body {
+  padding: 0.85rem 1rem;
+}
+
+.admin-card-body .text-muted {
+  color: rgba(255, 255, 255, 0.5) !important;
+}
+
+.admin-card-body .text-success {
+  color: #2dd4bf !important;
+}
+
+/* Stage photo & next bid bar */
+.admin-stage-photo {
+  position: relative;
+  width: 150px;
+  min-height: 140px;
+  background: linear-gradient(145deg, rgba(88, 80, 180, 0.2) 0%, rgba(20, 184, 166, 0.1) 100%);
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid rgba(139, 92, 246, 0.25);
+}
+
+.admin-stage-photo img {
+  width: 100%;
+  height: 100%;
+  min-height: 140px;
+  object-fit: cover;
+  object-position: top;
+  display: block;
+}
+
+.admin-nbb {
+  background: linear-gradient(90deg, rgba(88, 80, 180, 0.2) 0%, rgba(20, 184, 166, 0.12) 100%);
+  backdrop-filter: blur(6px);
+  border-radius: 12px;
+  padding: 0.6rem 0.85rem;
+  border: 1px solid rgba(20, 184, 166, 0.2);
+}
+
+.admin-bid-val.flash {
+  animation: admin-bid-flash 0.4s ease;
+}
+
+@keyframes admin-bid-flash {
+  0% { transform: scale(1); }
+  35% {
+    transform: scale(1.08);
+    filter: drop-shadow(0 0 8px rgba(20, 184, 166, 0.6));
+  }
+  100% { transform: scale(1); }
+}
+
+.admin-timer-big {
+  min-width: 3ch;
+}
+
+/* Buttons: Quartz teal/purple */
+.admin-card .btn-success {
+  background: linear-gradient(135deg, rgba(20, 184, 166, 0.4) 0%, rgba(20, 184, 166, 0.25) 100%) !important;
+  border: 1px solid rgba(20, 184, 166, 0.5) !important;
+  color: #fff !important;
+  backdrop-filter: blur(6px);
+}
+
+.admin-card .btn-success:hover:not(:disabled) {
+  background: linear-gradient(135deg, rgba(20, 184, 166, 0.5) 0%, rgba(20, 184, 166, 0.35) 100%) !important;
+  border-color: rgba(20, 184, 166, 0.7) !important;
+  box-shadow: 0 4px 16px rgba(20, 184, 166, 0.3);
+}
+
+.admin-card .btn-warning {
+  background: linear-gradient(135deg, rgba(251, 191, 36, 0.3) 0%, rgba(251, 191, 36, 0.18) 100%) !important;
+  border: 1px solid rgba(251, 191, 36, 0.5) !important;
+  color: #fff !important;
+  backdrop-filter: blur(6px);
+}
+
+.admin-card .btn-outline-secondary {
+  background: rgba(139, 92, 246, 0.15) !important;
+  border: 1px solid rgba(139, 92, 246, 0.35) !important;
+  color: rgba(255, 255, 255, 0.95) !important;
+  backdrop-filter: blur(6px);
+}
+
+.admin-card .btn-outline-secondary:hover:not(:disabled) {
+  background: rgba(139, 92, 246, 0.25) !important;
+  border-color: rgba(139, 92, 246, 0.5) !important;
+  color: #fff !important;
+}
+
+.btn-undo {
+  background: rgba(251, 191, 36, 0.15) !important;
+  border: 1px solid rgba(251, 191, 36, 0.4) !important;
+  color: #fbbf24 !important;
+  backdrop-filter: blur(6px);
+}
+
+.btn-undo:hover:not(:disabled) {
+  background: rgba(251, 191, 36, 0.25) !important;
+  border-color: rgba(251, 191, 36, 0.6) !important;
+  color: #fbbf24 !important;
+}
+
+/* ----- Players section (no card): centered table in viewport ----- */
+.admin-players-section {
+  padding: 1.5rem 0 2rem;
+  margin: 0;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+}
+
+.admin-players-title {
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.9);
+  margin: 0 0 1rem;
+  text-align: center;
+}
+
+.admin-table-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 1rem 1rem;
+}
+
+.admin-table-wrap {
+  overflow: hidden;
+  width: 100%;
+  max-width: 100%;
+  display: flex;
+  justify-content: center;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+}
+
+.admin-table {
+  width: 100%;
+  max-width: 960px;
+  min-width: 640px;
+  margin: 0 auto;
+  border-collapse: collapse;
+  font-size: 0.92rem;
+  border-radius: 12px;
+}
+
+.admin-table thead {
+  background: linear-gradient(135deg, rgba(88, 80, 180, 0.55) 0%, rgba(30, 58, 138, 0.4) 50%, rgba(20, 184, 166, 0.3) 100%);
+  backdrop-filter: blur(8px);
+  color: rgba(255, 255, 255, 0.98);
+  border-bottom: 2px solid rgba(20, 184, 166, 0.4);
+}
+
+.admin-table thead th {
+  padding: 1rem 1.15rem;
+  text-align: left;
+  font-weight: 700;
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.admin-table tbody tr {
+  background: rgba(88, 80, 180, 0.1);
+  color: rgba(255, 255, 255, 0.92);
+  transition: background 0.2s;
+}
+
+.admin-table tbody tr:nth-child(even) {
+  background: rgba(20, 184, 166, 0.08);
+}
+
+.admin-table tbody tr:hover {
+  background: rgba(139, 92, 246, 0.2);
+}
+
+.admin-table tbody td {
+  padding: 1rem 1.15rem;
+  border-bottom: 1px solid rgba(139, 92, 246, 0.12);
+  vertical-align: middle;
+}
+
+.admin-table-row-live {
+  background: linear-gradient(90deg, rgba(20, 184, 166, 0.3) 0%, rgba(20, 184, 166, 0.15) 100%) !important;
+}
+
+.admin-table-row-live:hover {
+  background: linear-gradient(90deg, rgba(20, 184, 166, 0.35) 0%, rgba(20, 184, 166, 0.2) 100%) !important;
+}
+
+.admin-table .badge {
+  font-size: 0.68rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: 6px;
+  font-weight: 600;
+}
+
+/* ----- Pagination ----- */
+.admin-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(139, 92, 246, 0.2);
+  width: 100%;
+  max-width: 720px;
+}
+
+.admin-pagination-btn {
+  padding: 0.4rem 0.9rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.95);
+  background: linear-gradient(135deg, rgba(88, 80, 180, 0.4) 0%, rgba(139, 92, 246, 0.3) 100%);
+  border: 1px solid rgba(139, 92, 246, 0.4);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.admin-pagination-btn:hover:not(:disabled) {
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.5) 0%, rgba(20, 184, 166, 0.25) 100%);
+  border-color: rgba(20, 184, 166, 0.5);
+}
+
+.admin-pagination-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.admin-pagination-info {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.7);
+  font-weight: 500;
+}
+
+/* ----- Start button redesign ----- */
+.admin-btn-start {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.4rem 0.85rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #fff;
+  background: linear-gradient(135deg, #14b8a6 0%, #0d9488 100%);
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 2px 8px rgba(20, 184, 166, 0.35);
+}
+
+.admin-btn-start:hover {
+  background: linear-gradient(135deg, #2dd4bf 0%, #14b8a6 100%);
+  box-shadow: 0 4px 14px rgba(20, 184, 166, 0.45);
+  transform: translateY(-1px);
+}
+
+.admin-btn-start:active {
+  transform: translateY(0);
+}
+
+.admin-btn-start-icon {
+  font-size: 0.7rem;
+  line-height: 1;
+  opacity: 0.95;
+}
+
+/* ----- Bid log & sold list: Quartz tint ----- */
+.admin-bid-log {
+  max-height: 240px;
+  overflow-y: auto;
+}
+
+.admin-bl {
+  background: linear-gradient(90deg, rgba(88, 80, 180, 0.15) 0%, rgba(20, 184, 166, 0.06) 100%);
+  backdrop-filter: blur(6px);
+  border-radius: 10px;
+  padding: 0.6rem 0.85rem;
+  margin-bottom: 0.4rem;
+  border: 1px solid rgba(139, 92, 246, 0.2);
+  border-left: 4px solid #14b8a6;
+  transition: background 0.2s;
+}
+
+.admin-bl:hover {
+  background: linear-gradient(90deg, rgba(88, 80, 180, 0.22) 0%, rgba(20, 184, 166, 0.1) 100%);
+}
+
+.admin-sold-list {
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.admin-sold-item {
+  border-bottom: 1px solid rgba(139, 92, 246, 0.15);
+  padding: 0.6rem 0;
+  transition: background 0.2s;
+}
+
+.admin-sold-item:hover {
+  background: rgba(88, 80, 180, 0.12);
+}
+
+.admin-sold-item:last-child {
+  border-bottom: none;
+}
+
+/* ----- Responsive ----- */
+@media (max-width: 991px) {
+  .admin-stage-photo {
+    width: 120px;
+    min-height: 120px;
+  }
+  .admin-stage-photo img {
+    min-height: 120px;
+  }
+  .admin-header-inner {
+    padding: 0.75rem 1rem;
+  }
+  .admin-table thead th,
+  .admin-table tbody td {
+    padding: 0.85rem 0.75rem;
+  }
+}
