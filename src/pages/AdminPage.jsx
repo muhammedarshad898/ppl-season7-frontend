@@ -747,8 +747,8 @@ export default function AdminPage() {
             <div className="admin-card admin-card-side admin-card-spaced">
               <div className="admin-card-header">Sold ({soldPlayers.length})</div>
               <div className="admin-card-body admin-sold-list">
-                {soldPlayers.slice(0, 8).reverse().map((s, i) => (
-                  <div key={i} className="admin-sold-item d-flex align-items-center gap-2 py-2">
+                {[...soldPlayers].reverse().map((s, i) => (
+                  <div key={s.player?.id != null ? `sold-${s.player.id}` : `sold-i-${i}`} className="admin-sold-item d-flex align-items-center gap-2 py-2">
                     <img
                       className="rounded flex-shrink-0"
                       src={resourceUrl(s.player?.photo)}
