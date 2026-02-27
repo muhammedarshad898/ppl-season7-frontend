@@ -1,8 +1,9 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { useSocket, getSocket } from '../hooks/useSocket';
 import { resourceUrl } from '../config/api';
 import { SoldCardContent, UnsoldCardContent } from '../components/SoldOverlay';
+import { playTimerAlarm } from '../utils/timerAlarm';
 import './ManagerPage.css';
 
 export default function ManagerPage() {
@@ -10,12 +11,21 @@ export default function ManagerPage() {
   const [selectedId, setSelectedId] = useState(null);
   const [tab, setTab] = useState('live');
   const [timerRemaining, setTimerRemaining] = useState(null);
+  const lastAlarmSecondRef = useRef(null);
 
   const { state } = useSocket();
   const socket = getSocket();
 
   useEffect(() => {
-    const onTimer = ({ remaining }) => setTimerRemaining(remaining);
+    const onTimer = ({ remaining }) => {
+      setTimerRemaining(remaining);
+      const r = Math.max(0, Number(remaining));
+      if (r >= 1 && r <= 5 && lastAlarmSecondRef.current !== r) {
+        lastAlarmSecondRef.current = r;
+        playTimerAlarm();
+      }
+      if (r > 5 || r === 0) lastAlarmSecondRef.current = null;
+    };
     socket.on('timerUpdate', onTimer);
     socket.on('timerFinalSeconds', onTimer);
     return () => {
@@ -54,7 +64,7 @@ export default function ManagerPage() {
   const displayTimer = phase === 'live' ? (timerRemaining ?? as.timerRemaining ?? 0) : 0;
 
   const showSoldOverlay =
-    (phase === 'sold' || phase === 'idle') && soldPlayers.length > 0;
+    phase === 'sold' && soldPlayers.length > 0;
   const lastSoldEntry = showSoldOverlay ? soldPlayers[soldPlayers.length - 1] : null;
   const lastSoldForOverlay = lastSoldEntry
     ? {

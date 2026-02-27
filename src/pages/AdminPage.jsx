@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { useSocket, getSocket } from '../hooks/useSocket';
 import { API_URL, resourceUrl } from '../config/api';
 import { SoldCardContent, UnsoldCardContent } from '../components/SoldOverlay';
+import { playTimerAlarm } from '../utils/timerAlarm';
 import './AdminPage.css';
 
 const ADMIN_KEY = 'ppl_admin';
@@ -59,6 +60,7 @@ export default function AdminPage() {
   const [uploadingPlayerPhoto, setUploadingPlayerPhoto] = useState(false);
   const [toast, setToast] = useState(null);
   const toastRef = useRef(null);
+  const lastAlarmSecondRef = useRef(null);
   const [teamModal, setTeamModal] = useState(null);
   const [teamForm, setTeamForm] = useState({ name: '', color: '#6b7280', budget: 1500, logo: '' });
   const [uploadingLogo, setUploadingLogo] = useState(false);
@@ -84,7 +86,7 @@ export default function AdminPage() {
   const config = state?.config || {};
 
   const showSoldOverlay =
-    (phase === 'sold' || phase === 'idle') && Array.isArray(soldPlayers) && soldPlayers.length > 0;
+    phase === 'sold' && Array.isArray(soldPlayers) && soldPlayers.length > 0;
   const lastSoldEntry = showSoldOverlay ? soldPlayers[soldPlayers.length - 1] : null;
   const lastSoldForOverlay = lastSoldEntry
     ? {
@@ -144,8 +146,17 @@ export default function AdminPage() {
   }, []);
 
   useEffect(() => {
-    socket.on('timerUpdate', ({ remaining }) => setTimerRemaining(remaining));
-    socket.on('timerFinalSeconds', ({ remaining }) => setTimerRemaining(remaining));
+    const onTimer = ({ remaining }) => {
+      setTimerRemaining(remaining);
+      const r = Math.max(0, Number(remaining));
+      if (r >= 1 && r <= 5 && lastAlarmSecondRef.current !== r) {
+        lastAlarmSecondRef.current = r;
+        playTimerAlarm();
+      }
+      if (r > 5 || r === 0) lastAlarmSecondRef.current = null;
+    };
+    socket.on('timerUpdate', onTimer);
+    socket.on('timerFinalSeconds', onTimer);
     socket.on('bidFlash', () => {
       setBidFlash(true);
       setTimeout(() => setBidFlash(false), 400);
@@ -157,8 +168,8 @@ export default function AdminPage() {
       showToast('Backup imported successfully');
     });
     return () => {
-      socket.off('timerUpdate');
-      socket.off('timerFinalSeconds');
+      socket.off('timerUpdate', onTimer);
+      socket.off('timerFinalSeconds', onTimer);
       socket.off('bidFlash');
       socket.off('bidError');
       socket.off('backupImported');
@@ -591,7 +602,7 @@ export default function AdminPage() {
                     <tbody>
                       {paginatedPlayers.map((pl) => {
                         const isLive = pl.id === p?.id && phase === 'live';
-                        const canStart = pl.status === 'available' && (phase === 'idle' || phase === 'unsold');
+                        const canStart = pl.status === 'available' && (phase === 'idle' || phase === 'unsold' || phase === 'sold');
                         const canSetAvailable = pl.status === 'sold' || pl.status === 'unsold';
                         return (
                           <tr key={pl.id} className={isLive ? 'admin-table-row-live' : ''}>

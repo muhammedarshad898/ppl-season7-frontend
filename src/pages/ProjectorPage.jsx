@@ -1,13 +1,15 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { useSocket, getSocket } from '../hooks/useSocket';
 import { resourceUrl } from '../config/api';
 import SoldOverlay, { UnsoldOverlay } from '../components/SoldOverlay';
+import { playTimerAlarm } from '../utils/timerAlarm';
 import './ProjectorPage.css';
 
 export default function ProjectorPage() {
   const { state } = useSocket();
   const [timerRemaining, setTimerRemaining] = useState(null);
   const [lastSold, setLastSold] = useState(null);
+  const lastAlarmSecondRef = useRef(null);
 
   const as = state?.auctionState || {};
   const config = state?.config || {};
@@ -18,7 +20,15 @@ export default function ProjectorPage() {
 
   useEffect(() => {
     const socket = getSocket();
-    const onTimer = ({ remaining }) => setTimerRemaining(remaining);
+    const onTimer = ({ remaining }) => {
+      setTimerRemaining(remaining);
+      const r = Math.max(0, Number(remaining));
+      if (r >= 1 && r <= 5 && lastAlarmSecondRef.current !== r) {
+        lastAlarmSecondRef.current = r;
+        playTimerAlarm();
+      }
+      if (r > 5 || r === 0) lastAlarmSecondRef.current = null;
+    };
     socket.on('timerUpdate', onTimer);
     socket.on('timerFinalSeconds', onTimer);
     return () => {
@@ -54,7 +64,7 @@ export default function ProjectorPage() {
     : null;
   const lastSoldToShow = lastSold || lastSoldFromState;
   const showSoldOverlay =
-    (phase === 'sold' || phase === 'idle') && lastSoldToShow && soldPlayers.length > 0;
+    phase === 'sold' && lastSoldToShow && soldPlayers.length > 0;
   const showUnsoldOverlay = phase === 'unsold';
   const nextIncrement =
     (currentBid || 0) < (config.thresholdBid ?? 200)
