@@ -1,0 +1,394 @@
+/* Shared sold congratulations overlay – projector, manager, admin */
+
+.sold-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(10, 10, 15, 0.94);
+  animation: sold-overlay-fade-in 0.5s ease-out;
+}
+
+@keyframes sold-overlay-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.sold-overlay-poppers {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.sold-overlay-confetti {
+  position: absolute;
+  left: calc((var(--i) / 59) * 100%);
+  top: -20px;
+  width: 12px;
+  height: 12px;
+  border-radius: 2px;
+  background: var(--c, #14b8a6);
+  opacity: 0.9;
+  animation: sold-overlay-confetti-fall 4s linear infinite;
+  animation-delay: calc(var(--i) * -0.18s);
+  transform-origin: center center;
+}
+
+.sold-overlay-confetti:nth-child(6n + 1) { --c: #14b8a6; width: 8px; height: 14px; }
+.sold-overlay-confetti:nth-child(6n + 2) { --c: #fbbf24; width: 14px; height: 8px; }
+.sold-overlay-confetti:nth-child(6n + 3) { --c: #8b5cf6; width: 10px; height: 10px; }
+.sold-overlay-confetti:nth-child(6n + 4) { --c: #f87171; width: 12px; height: 12px; }
+.sold-overlay-confetti:nth-child(6n + 5) { --c: #60a5fa; width: 9px; height: 13px; }
+.sold-overlay-confetti:nth-child(6n + 6) { --c: #34d399; width: 11px; height: 11px; }
+
+@keyframes sold-overlay-confetti-fall {
+  0% {
+    transform: translateY(-10px) translateX(0) rotate(0deg);
+    opacity: 0.9;
+  }
+  25% {
+    transform: translateY(25vh) translateX(15px) rotate(90deg);
+    opacity: 0.9;
+  }
+  50% {
+    transform: translateY(50vh) translateX(-10px) rotate(180deg);
+    opacity: 0.9;
+  }
+  75% {
+    transform: translateY(75vh) translateX(12px) rotate(270deg);
+    opacity: 0.9;
+  }
+  100% {
+    transform: translateY(110vh) translateX(0) rotate(360deg);
+    opacity: 0.9;
+  }
+}
+
+.sold-overlay-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding: 2rem 3rem;
+  max-width: 90%;
+  animation: sold-overlay-scale-in 0.6s ease-out 0.2s both;
+}
+
+@keyframes sold-overlay-scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.sold-overlay-headline {
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  margin: 0 0 0.5rem;
+  color: #fbbf24;
+  text-shadow: 0 0 20px rgba(251, 191, 36, 0.5);
+}
+
+.sold-overlay-welcome {
+  font-size: clamp(1.25rem, 3vw, 2rem);
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  margin: 0 0 1rem;
+  color: #fff;
+}
+
+.sold-overlay-tagline {
+  font-size: clamp(1rem, 2.2vw, 1.35rem);
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.9);
+  margin: 0 0 0.25rem;
+  line-height: 1.4;
+}
+
+.sold-overlay-tagline2 {
+  font-size: clamp(1rem, 2.2vw, 1.35rem);
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.9);
+  margin: 0 0 1.25rem;
+  line-height: 1.4;
+}
+
+.sold-overlay-player-team {
+  margin: 1rem 0;
+}
+
+.sold-overlay-name {
+  font-size: clamp(1.75rem, 4vw, 3rem);
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  margin: 0 0 0.5rem;
+  color: #fff;
+  text-shadow: 0 2px 16px rgba(0, 0, 0, 0.5);
+}
+
+.sold-overlay-squad {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: clamp(1.1rem, 2.5vw, 1.6rem);
+  font-weight: 700;
+  padding: 0.45rem 1.25rem;
+  border-radius: 12px;
+  border: 2px solid;
+  background: rgba(255, 255, 255, 0.08);
+  margin: 0 0 0.5rem;
+}
+
+.sold-overlay-team-logo {
+  width: 36px;
+  height: 36px;
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+.sold-overlay-price {
+  font-size: clamp(1.25rem, 3vw, 2rem);
+  font-weight: 800;
+  color: #14b8a6;
+  margin: 0.5rem 0 0;
+  text-shadow: 0 0 20px rgba(20, 184, 166, 0.4);
+}
+
+.sold-overlay-next-hint {
+  font-size: clamp(0.85rem, 1.8vw, 1.1rem);
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.5);
+  margin: 1.5rem 0 0;
+  letter-spacing: 0.06em;
+}
+
+/* ----- In-card variant (Admin Live stage, Manager live card) ----- */
+.sold-card-wrapper {
+  position: relative;
+  overflow: hidden;
+  min-height: 260px;
+  border-radius: inherit;
+}
+
+.sold-card-poppers {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.sold-card-confetti {
+  position: absolute;
+  left: calc((var(--i) / 49) * 100%);
+  top: -16px;
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+  background: var(--c, #14b8a6);
+  opacity: 0.9;
+  animation: sold-overlay-confetti-fall 3.5s linear infinite;
+  animation-delay: calc(var(--i) * -0.15s);
+  transform-origin: center center;
+}
+
+.sold-card-confetti:nth-child(6n + 1) { --c: #14b8a6; width: 6px; height: 12px; }
+.sold-card-confetti:nth-child(6n + 2) { --c: #fbbf24; width: 12px; height: 6px; }
+.sold-card-confetti:nth-child(6n + 3) { --c: #8b5cf6; width: 8px; height: 8px; }
+.sold-card-confetti:nth-child(6n + 4) { --c: #f87171; width: 10px; height: 10px; }
+.sold-card-confetti:nth-child(6n + 5) { --c: #60a5fa; width: 7px; height: 11px; }
+.sold-card-confetti:nth-child(6n + 6) { --c: #34d399; width: 9px; height: 9px; }
+
+.sold-card-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding: 1rem 0.5rem;
+}
+
+.sold-card-headline {
+  font-size: 1.1rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  margin: 0 0 0.35rem;
+  color: #fbbf24;
+}
+
+.sold-card-welcome {
+  font-size: 1rem;
+  font-weight: 700;
+  margin: 0 0 0.5rem;
+  color: inherit;
+}
+
+.sold-card-tagline {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.85);
+  margin: 0 0 0.75rem;
+  line-height: 1.35;
+}
+
+.sold-card-player-team {
+  margin: 0.75rem 0;
+}
+
+.sold-card-name {
+  font-size: 1.35rem;
+  font-weight: 800;
+  margin: 0 0 0.35rem;
+  color: inherit;
+}
+
+.sold-card-squad {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.95rem;
+  font-weight: 700;
+  padding: 0.35rem 0.9rem;
+  border-radius: 10px;
+  border: 2px solid;
+  background: rgba(255, 255, 255, 0.08);
+  margin: 0;
+}
+
+.sold-card-team-logo {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+  border-radius: 6px;
+}
+
+.sold-card-price {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: #14b8a6;
+  margin: 0.5rem 0 0;
+}
+
+.sold-card-next-hint {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.5);
+  margin: 0.75rem 0 0;
+  letter-spacing: 0.04em;
+}
+
+/* ----- Unsold message (Admin Live stage, Manager live card) ----- */
+.unsold-card-content {
+  text-align: center;
+  padding: 1.5rem 0.5rem;
+}
+
+.unsold-card-headline {
+  font-size: 1.15rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  margin: 0 0 0.5rem;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.unsold-card-player {
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.75);
+  margin: 0 0 0.75rem;
+}
+
+.unsold-card-message {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #fbbf24;
+  margin: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.unsold-heart {
+  display: inline-block;
+  animation: unsold-heart-beat 0.8s ease-in-out infinite;
+}
+
+@keyframes unsold-heart-beat {
+  0%, 100% { transform: scale(1); }
+  15% { transform: scale(1.25); }
+  30% { transform: scale(1); }
+  45% { transform: scale(1.2); }
+  60% { transform: scale(1); }
+}
+
+.unsold-card-next-hint {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.5);
+  margin: 1rem 0 0;
+  letter-spacing: 0.04em;
+}
+
+/* ----- Full-viewport unsold overlay (projector) ----- */
+.unsold-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(10, 10, 15, 0.96);
+  animation: sold-overlay-fade-in 0.5s ease-out;
+}
+
+.unsold-overlay-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding: 2rem 3rem;
+  max-width: 90%;
+  animation: sold-overlay-scale-in 0.6s ease-out 0.2s both;
+}
+
+.unsold-overlay-headline {
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  margin: 0 0 0.5rem;
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.unsold-overlay-player {
+  font-size: clamp(1rem, 2.2vw, 1.35rem);
+  color: rgba(255, 255, 255, 0.8);
+  margin: 0 0 1rem;
+}
+
+.unsold-overlay-message {
+  font-size: clamp(1.25rem, 3vw, 2rem);
+  font-weight: 800;
+  color: #fbbf24;
+  margin: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.unsold-overlay-heart {
+  animation: unsold-heart-beat 0.8s ease-in-out infinite;
+}
+
+.unsold-overlay-next-hint {
+  font-size: clamp(0.85rem, 1.8vw, 1.1rem);
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.5);
+  margin: 1.5rem 0 0;
+  letter-spacing: 0.06em;
+}

@@ -2,15 +2,27 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useSocket, getSocket } from '../hooks/useSocket';
 import { resourceUrl } from '../config/api';
+import { SoldCardContent, UnsoldCardContent } from '../components/SoldOverlay';
 import './ManagerPage.css';
 
 export default function ManagerPage() {
   const [myTeamId, setMyTeamId] = useState(null);
   const [selectedId, setSelectedId] = useState(null);
   const [tab, setTab] = useState('live');
+  const [timerRemaining, setTimerRemaining] = useState(null);
 
   const { state } = useSocket();
   const socket = getSocket();
+
+  useEffect(() => {
+    const onTimer = ({ remaining }) => setTimerRemaining(remaining);
+    socket.on('timerUpdate', onTimer);
+    socket.on('timerFinalSeconds', onTimer);
+    return () => {
+      socket.off('timerUpdate', onTimer);
+      socket.off('timerFinalSeconds', onTimer);
+    };
+  }, [socket]);
 
   useEffect(() => {
     document.body.classList.add('ppl-manager');
@@ -31,13 +43,30 @@ export default function ManagerPage() {
   const config = state?.config || {};
   const team = teams.find((t) => t.id === myTeamId);
 
-  const phase = as.phase || 'idle';
+  const phase = typeof as.phase === 'string' ? as.phase.toLowerCase() : (as.phase || 'idle');
   const p = as.currentPlayer;
   const currentBid = as.currentBid || 0;
   const leadingTeam = as.leadingTeam;
   const bidHistory = as.bidHistory || [];
+  const soldPlayers = Array.isArray(as.soldPlayers) ? as.soldPlayers : [];
   const isLeading = leadingTeam?.id === myTeamId;
   const isEnded = !p || phase === 'idle' || phase === 'sold' || phase === 'unsold';
+  const displayTimer = phase === 'live' ? (timerRemaining ?? as.timerRemaining ?? 0) : 0;
+
+  const showSoldOverlay =
+    (phase === 'sold' || phase === 'idle') && soldPlayers.length > 0;
+  const lastSoldEntry = showSoldOverlay ? soldPlayers[soldPlayers.length - 1] : null;
+  const lastSoldForOverlay = lastSoldEntry
+    ? {
+        player: lastSoldEntry.player,
+        team: {
+          name: lastSoldEntry.team,
+          color: lastSoldEntry.teamColor,
+          logo: lastSoldEntry.teamLogo,
+        },
+        price: lastSoldEntry.price,
+      }
+    : null;
 
   const inc =
     currentBid < (config.thresholdBid ?? 200)
@@ -129,8 +158,8 @@ export default function ManagerPage() {
               <div className="mgr-header-amount-label">Remaining</div>
             </div>
             {phase === 'live' && (
-              <span className={`mgr-timer-pill ${(as.timerRemaining ?? 0) <= 3 ? 'mgr-timer-pill-crit' : ''}`}>
-                {Math.max(0, as.timerRemaining ?? 0)}s
+              <span className={`mgr-timer-pill ${displayTimer <= 3 ? 'mgr-timer-pill-crit' : ''}`}>
+                {Math.max(0, displayTimer)}s
               </span>
             )}
             <Link to="/" className="mgr-header-btn">← Home</Link>
@@ -175,9 +204,16 @@ export default function ManagerPage() {
                 <div className="mgr-live-overlay position-absolute top-0 start-0 end-0 bottom-0" />
                 {isEnded ? (
                   <div className="mgr-live-wait position-relative p-5 text-center">
-                    {phase === 'idle' && '⚽ Waiting for next lot…'}
-                    {phase === 'sold' && '✅ Sold! Next lot coming…'}
-                    {phase === 'unsold' && '❌ Unsold. Next lot…'}
+                    {phase === 'unsold' ? (
+                      <UnsoldCardContent playerName={p?.name} />
+                    ) : showSoldOverlay ? (
+                      <SoldCardContent lastSold={lastSoldForOverlay} />
+                    ) : (
+                      <>
+                        {phase === 'idle' && '⚽ Waiting for next lot…'}
+                        {phase === 'sold' && '✅ Sold! Next lot coming…'}
+                      </>
+                    )}
                   </div>
                 ) : (
                   <div className="position-relative row g-0 mgr-live-content">

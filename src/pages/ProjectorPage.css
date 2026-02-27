@@ -83,6 +83,177 @@
   50% { opacity: 0.4; transform: scale(0.9); }
 }
 
+/* ----- Sold: congratulations overlay with continuous birthday popper ----- */
+.proj-sold-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(10, 10, 15, 0.94);
+  animation: proj-sold-fade-in 0.5s ease-out;
+}
+
+@keyframes proj-sold-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Continuous falling confetti (birthday popper style) – loops until next auction */
+.proj-sold-poppers {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.proj-sold-confetti {
+  position: absolute;
+  left: calc((var(--i) / 59) * 100%);
+  top: -20px;
+  width: 12px;
+  height: 12px;
+  border-radius: 2px;
+  background: var(--c, #14b8a6);
+  opacity: 0.9;
+  animation: proj-confetti-fall 4s linear infinite;
+  animation-delay: calc(var(--i) * -0.18s);
+  transform-origin: center center;
+}
+
+.proj-sold-confetti:nth-child(6n + 1) { --c: #14b8a6; width: 8px; height: 14px; }
+.proj-sold-confetti:nth-child(6n + 2) { --c: #fbbf24; width: 14px; height: 8px; }
+.proj-sold-confetti:nth-child(6n + 3) { --c: #8b5cf6; width: 10px; height: 10px; }
+.proj-sold-confetti:nth-child(6n + 4) { --c: #f87171; width: 12px; height: 12px; }
+.proj-sold-confetti:nth-child(6n + 5) { --c: #60a5fa; width: 9px; height: 13px; }
+.proj-sold-confetti:nth-child(6n + 6) { --c: #34d399; width: 11px; height: 11px; }
+
+@keyframes proj-confetti-fall {
+  0% {
+    transform: translateY(-10px) translateX(0) rotate(0deg);
+    opacity: 0.9;
+  }
+  25% {
+    transform: translateY(25vh) translateX(15px) rotate(90deg);
+    opacity: 0.9;
+  }
+  50% {
+    transform: translateY(50vh) translateX(-10px) rotate(180deg);
+    opacity: 0.9;
+  }
+  75% {
+    transform: translateY(75vh) translateX(12px) rotate(270deg);
+    opacity: 0.9;
+  }
+  100% {
+    transform: translateY(110vh) translateX(0) rotate(360deg);
+    opacity: 0.9;
+  }
+}
+
+.proj-sold-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding: 2rem 3rem;
+  max-width: 90%;
+  animation: proj-sold-scale-in 0.6s ease-out 0.2s both;
+}
+
+@keyframes proj-sold-scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.proj-sold-headline {
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  margin: 0 0 0.5rem;
+  color: #fbbf24;
+  text-shadow: 0 0 20px rgba(251, 191, 36, 0.5);
+}
+
+.proj-sold-welcome {
+  font-size: clamp(1.25rem, 3vw, 2rem);
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  margin: 0 0 1rem;
+  color: #fff;
+}
+
+.proj-sold-tagline {
+  font-size: clamp(1rem, 2.2vw, 1.35rem);
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.9);
+  margin: 0 0 0.25rem;
+  line-height: 1.4;
+}
+
+.proj-sold-tagline2 {
+  font-size: clamp(1rem, 2.2vw, 1.35rem);
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.9);
+  margin: 0 0 1.25rem;
+  line-height: 1.4;
+}
+
+.proj-sold-player-team {
+  margin: 1rem 0;
+}
+
+.proj-sold-name {
+  font-size: clamp(1.75rem, 4vw, 3rem);
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  margin: 0 0 0.5rem;
+  color: #fff;
+  text-shadow: 0 2px 16px rgba(0, 0, 0, 0.5);
+}
+
+.proj-sold-squad {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: clamp(1.1rem, 2.5vw, 1.6rem);
+  font-weight: 700;
+  padding: 0.45rem 1.25rem;
+  border-radius: 12px;
+  border: 2px solid;
+  background: rgba(255, 255, 255, 0.08);
+  margin: 0 0 0.5rem;
+}
+
+.proj-sold-team-logo {
+  width: 36px;
+  height: 36px;
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+.proj-sold-price {
+  font-size: clamp(1.25rem, 3vw, 2rem);
+  font-weight: 800;
+  color: #14b8a6;
+  margin: 0.5rem 0 0;
+  text-shadow: 0 0 20px rgba(20, 184, 166, 0.4);
+}
+
+.proj-sold-next-hint {
+  font-size: clamp(0.85rem, 1.8vw, 1.1rem);
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.5);
+  margin: 1.5rem 0 0;
+  letter-spacing: 0.06em;
+}
+
 /* ----- Live: current lot ----- */
 .proj-live {
   position: fixed;

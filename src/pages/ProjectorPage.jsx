@@ -1,17 +1,61 @@
-import { useSocket } from '../hooks/useSocket';
+import { useEffect, useState } from 'react';
+import { useSocket, getSocket } from '../hooks/useSocket';
 import { resourceUrl } from '../config/api';
+import SoldOverlay, { UnsoldOverlay } from '../components/SoldOverlay';
 import './ProjectorPage.css';
 
 export default function ProjectorPage() {
   const { state } = useSocket();
+  const [timerRemaining, setTimerRemaining] = useState(null);
+  const [lastSold, setLastSold] = useState(null);
 
   const as = state?.auctionState || {};
   const config = state?.config || {};
   const teams = state?.teams || [];
-  const { phase, currentPlayer: p, currentBid, leadingTeam, bidHistory = [], timerRemaining = 0 } = as;
+  const { currentPlayer: p, currentBid, leadingTeam, bidHistory = [] } = as;
+  const phase = typeof as.phase === 'string' ? as.phase.toLowerCase() : (as.phase || 'idle');
+  const soldPlayers = Array.isArray(as.soldPlayers) ? as.soldPlayers : [];
+
+  useEffect(() => {
+    const socket = getSocket();
+    const onTimer = ({ remaining }) => setTimerRemaining(remaining);
+    socket.on('timerUpdate', onTimer);
+    socket.on('timerFinalSeconds', onTimer);
+    return () => {
+      socket.off('timerUpdate', onTimer);
+      socket.off('timerFinalSeconds', onTimer);
+    };
+  }, []);
+
+  useEffect(() => {
+    const socket = getSocket();
+    const onPlayerSold = ({ player, team, price }) => setLastSold({ player, team, price });
+    socket.on('playerSold', onPlayerSold);
+    return () => socket.off('playerSold', onPlayerSold);
+  }, []);
+
+  useEffect(() => {
+    if (phase === 'live') setLastSold(null);
+  }, [phase]);
+
+  const displayTimer = phase === 'live' ? (timerRemaining ?? as.timerRemaining ?? 0) : 0;
 
   const isIdle = !p || phase === 'idle';
   const isLive = phase === 'live';
+  const lastEntry = soldPlayers.length > 0 ? soldPlayers[soldPlayers.length - 1] : null;
+  const lastSoldFromState = lastEntry
+    ? {
+        player: lastEntry.player,
+        team: lastEntry.team
+          ? { name: lastEntry.team, color: lastEntry.teamColor, logo: lastEntry.teamLogo }
+          : null,
+        price: lastEntry.price,
+      }
+    : null;
+  const lastSoldToShow = lastSold || lastSoldFromState;
+  const showSoldOverlay =
+    (phase === 'sold' || phase === 'idle') && lastSoldToShow && soldPlayers.length > 0;
+  const showUnsoldOverlay = phase === 'unsold';
   const nextIncrement =
     (currentBid || 0) < (config.thresholdBid ?? 200)
       ? config.highIncrement ?? 20
@@ -20,7 +64,9 @@ export default function ProjectorPage() {
 
   return (
     <div className="proj-root">
-      {isIdle ? (
+      {showSoldOverlay && <SoldOverlay lastSold={lastSoldToShow} />}
+      {showUnsoldOverlay && <UnsoldOverlay playerName={p?.name} />}
+      {!showSoldOverlay && !showUnsoldOverlay && isIdle ? (
         <div className="proj-idle">
           <div className="proj-idle-inner">
             {config.leagueLogo && (
@@ -42,7 +88,8 @@ export default function ProjectorPage() {
             </div>
           </div>
         </div>
-      ) : (
+      ) : null}
+      {!showSoldOverlay && !showUnsoldOverlay && !isIdle ? (
         <div className="proj-live">
           <div className="proj-live-body">
             <div className="proj-hero">
@@ -74,9 +121,9 @@ export default function ProjectorPage() {
               <div className="proj-bid-value">₹{(currentBid || 0).toLocaleString()}</div>
               {isLive && (
                 <div
-                  className={`proj-timer ${(timerRemaining ?? 0) <= 3 ? 'proj-timer-crit' : ''}`}
+                  className={`proj-timer ${displayTimer <= 3 ? 'proj-timer-crit' : ''}`}
                 >
-                  {Math.max(0, timerRemaining ?? 0)}s
+                  {Math.max(0, displayTimer)}s
                 </div>
               )}
               <div className="proj-leader">
@@ -165,7 +212,7 @@ export default function ProjectorPage() {
             })}
           </footer>
         </div>
-      )}
+      ) : null}
     </div>
   );
 }
