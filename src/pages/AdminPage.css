@@ -954,10 +954,10 @@ body.ppl-admin {
   border-bottom: none;
 }
 
-/* ----- Toast ----- */
+/* ----- Toast (top-right) ----- */
 .admin-toast {
   position: fixed;
-  bottom: 1.5rem;
+  top: 1.5rem;
   right: 1.5rem;
   z-index: 999;
   display: flex;
@@ -997,7 +997,7 @@ body.ppl-admin {
 @keyframes admin-toast-in {
   from {
     opacity: 0;
-    transform: translateY(10px);
+    transform: translateY(-10px);
   }
   to {
     opacity: 1;

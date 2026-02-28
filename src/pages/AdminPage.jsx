@@ -198,6 +198,7 @@ export default function AdminPage() {
       }
       sessionStorage.setItem(ADMIN_KEY, '1');
       setAuthenticated(true);
+      showToast('Login successful', 'success');
     } catch (err) {
       setLoginError('Server auth unavailable. Refresh and try again.');
     }
