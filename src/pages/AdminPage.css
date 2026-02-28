@@ -548,10 +548,12 @@ body.ppl-admin {
 }
 
 .admin-table-wrap {
-  overflow: hidden;
+  overflow-x: auto;
+  overflow-y: visible;
   width: 100%;
   border-radius: 12px;
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+  -webkit-overflow-scrolling: touch;
 }
 
 .admin-table {
@@ -561,6 +563,29 @@ body.ppl-admin {
   border-collapse: collapse;
   font-size: 0.92rem;
   border-radius: 12px;
+}
+
+/* Small screens: compact table so less horizontal scroll needed */
+@media (max-width: 576px) {
+  .admin-table {
+    min-width: 520px;
+    font-size: 0.85rem;
+  }
+  .admin-table thead th,
+  .admin-table tbody td {
+    padding: 0.5rem 0.6rem;
+  }
+  .admin-table thead th {
+    font-size: 0.65rem;
+  }
+  .admin-table .d-flex.gap-1 {
+    gap: 0.25rem !important;
+  }
+  .admin-table .btn-sm,
+  .admin-btn-start {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.75rem;
+  }
 }
 
 .admin-table thead {
